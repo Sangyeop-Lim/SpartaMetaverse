@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MainBaseController
+public class MainPlayerController : MainBaseController
 {
     private Camera camera;
 
