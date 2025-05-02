@@ -5,10 +5,10 @@ using static GameSceneManager;
 
 public class LadderTrigger : MonoBehaviour
 {
-    [SerializeField] private SceneType targetScene;
-    [SerializeField] private GameObject interactionUI;
+    [SerializeField] private SceneType targetScene; // 전환할 씬 타입을 설정하기 위한 변수
+    [SerializeField] private GameObject interactionUI; // E키를 눌렀을 때 표시될 UI
 
-    private bool isPlayerInRange = false;
+    private bool isPlayerInRange = false; // 플레이어가 범위 안에 있는지 여부를 판단하는 변수
 
     private void Update()
     {
@@ -19,7 +19,7 @@ public class LadderTrigger : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other) // 플레이어가 트리거 영역에 들어왔을 때 호출되는 메서드
     {
         if (other.CompareTag("Player"))
         {
@@ -30,7 +30,7 @@ public class LadderTrigger : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D other) // 플레이어가 트리거 영역에서 나갔을 때 호출되는 메서드
     {
         if (other.CompareTag("Player"))
         {
