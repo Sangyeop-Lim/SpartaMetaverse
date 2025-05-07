@@ -33,7 +33,6 @@ public class Obstacle : MonoBehaviour
         placePosition.y = Random.Range(lowPosY, highPosY);
 
         transform.position = placePosition;
-
         return placePosition;
     }
 
@@ -41,6 +40,8 @@ public class Obstacle : MonoBehaviour
     {
         Plane plane = other.GetComponent<Plane>();
         if (plane != null)
+        {
             gameManager.AddScore(1);
+        }            
     }
 }

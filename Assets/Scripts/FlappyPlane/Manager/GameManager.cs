@@ -13,6 +13,11 @@ public class GameManager : MonoBehaviour
     }
 
     private int currentScore = 0;
+    private int bestScore = 0;
+
+    private const string BestScoreKey = "BestScore";
+
+    [SerializeField] private GameObject resultPanel;
 
     UIManager uiManager;
 
@@ -25,18 +30,35 @@ public class GameManager : MonoBehaviour
     {
         gameManager = this;
         uiManager = FindObjectOfType<UIManager>();
+        bestScore = PlayerPrefs.GetInt(BestScoreKey, 0);
     }
 
     private void Start()
     {
         uiManager.UpdateScore(0);
+        uiManager.UpdateBestScore(bestScore);
+
+        if (resultPanel != null)
+            resultPanel.SetActive(false);
     }
 
 
     public void GameOver()
     {
         Debug.Log("Game Over");
-        uiManager.SetRestart();
+
+        if (currentScore > bestScore)
+        {
+            bestScore = currentScore;
+            PlayerPrefs.SetInt(BestScoreKey, bestScore);
+            uiManager.UpdateBestScore(bestScore);
+            Debug.Log("최고 점수 갱신: " + bestScore);
+        }
+
+        if (resultPanel != null)
+            resultPanel.SetActive(true);
+
+        uiManager.ShowResult(currentScore, bestScore);
     }
 
     public void RestartGame()
@@ -47,7 +69,7 @@ public class GameManager : MonoBehaviour
     public void AddScore(int score)
     {
         currentScore += score;
-
+        Debug.Log($"[AddScore] Called. +{score}, Total: {currentScore}");
         uiManager.UpdateScore(currentScore);
         Debug.Log("Score: " + currentScore);
     }

@@ -11,7 +11,6 @@ public class Plane : MonoBehaviour
     public float flapForce = 6f;
     public float forwardSpeed = 3f;
     public bool isDead = false;
-    float deathCooldown = 0f;
 
     bool isFlap = false;
 
@@ -37,26 +36,12 @@ public class Plane : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isDead)
+        if (isDead) // 게임 오버 상태에서는 입력을 막음 (재시작은 버튼으로만)
+            return;
+
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
-            if (deathCooldown <= 0)
-            {
-                if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
-                {
-                    gameManager.RestartGame();
-                }
-            }
-            else
-            {
-                deathCooldown -= Time.deltaTime;
-            }
-        }
-        else
-        {
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
-            {
-                isFlap = true;
-            }
+            isFlap = true;
         }
     }
 
@@ -87,7 +72,6 @@ public class Plane : MonoBehaviour
 
         animator.SetInteger("IsDie", 1);
         isDead = true;
-        deathCooldown = 1f;
         gameManager.GameOver();
     }
 }
