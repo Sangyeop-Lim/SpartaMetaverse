@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Plane : MonoBehaviour
 {
+    GameManager gameManager = null;
     Animator animator = null;
     Rigidbody2D _rigidbody = null;
 
@@ -17,6 +18,8 @@ public class Plane : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameManager.Instance;
+
         animator = transform.GetComponentInChildren<Animator>();
         _rigidbody = transform.GetComponent<Rigidbody2D>();
 
@@ -39,7 +42,8 @@ public class Plane : MonoBehaviour
             if (deathCooldown <= 0)
             {
                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
-                { 
+                {
+                    gameManager.RestartGame();
                 }
             }
             else
@@ -84,5 +88,6 @@ public class Plane : MonoBehaviour
         animator.SetInteger("IsDie", 1);
         isDead = true;
         deathCooldown = 1f;
+        gameManager.GameOver();
     }
 }

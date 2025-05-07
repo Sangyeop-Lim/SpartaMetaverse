@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
+    GameManager gameManager;
+
     public float highPosY = 1f;
     public float lowPosY = -1f;
 
@@ -14,6 +16,11 @@ public class Obstacle : MonoBehaviour
     public Transform bottomObject;
 
     public float widthPadding = 4f;
+
+    public void Start()
+    {
+        gameManager = GameManager.Instance;
+    }
 
     public Vector3 SetRandomPlace(Vector3 lastPosition, int obstacleCount)
     {
@@ -28,5 +35,12 @@ public class Obstacle : MonoBehaviour
         transform.position = placePosition;
 
         return placePosition;
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        Plane plane = other.GetComponent<Plane>();
+        if (plane != null)
+            gameManager.AddScore(1);
     }
 }
