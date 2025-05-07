@@ -404,6 +404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58e25e189ddbfb446ac1d959fa830535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  titleUIPrefab: {fileID: 3441317649210002092, guid: 3182a58c1fcfcee49aa1d5a1789dc2ab, type: 3}
 --- !u!4 &606097844
 Transform:
   m_ObjectHideFlags: 0

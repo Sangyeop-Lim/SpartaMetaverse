@@ -15,7 +15,7 @@ public class LadderTrigger : MonoBehaviour
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("미니게임 시작");
-            GameSceneManager.Instance.LoadScene(targetScene);
+            GameSceneManager.Instance.LoadSceneWithTitle(targetScene);
         }
     }
 
